@@ -2,10 +2,19 @@
 
 'use client';
 import React from 'react'
+import {Button} from "react-bootstrap";
 
+
+// handelSubmit : fonction qui gère la soumission du formulaire de connexion (login) et qui envoie les données au serveur via l'API de l'utilisateur
+
+const handelSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    console.log(formData);
+};
 const LoginForm = () => {
     return (
-        <div className="container p-5 mt-5 mb-5 text-center w-100">
+        <div className="d-flex flex-column justify-content-center align-items-center mt-5 mb-5 text-center w-100">
             <h1>Se connecter</h1><br/>
             <div className="container card bg-light show-form w-50 shadow-lg">
                 <form className="card-body ">
@@ -17,9 +26,9 @@ const LoginForm = () => {
                         <label htmlFor="password" className="form-label">Mot de passe</label>
                         <input type="password" className="form-control form-control border-pink-500 border-3" id="password" placeholder="Mot de passe"/>
                     </div>
-                    <div className="container d-grid gap-2 small">
-                        <button type="submit" className="btn btn-primary">Se connecter</button>
-                        <button type="button" className="btn btn-secondary">S&apo;snscrire</button>
+                    <div className="d-flex justify-content-center align-items-center mt-3 space-x-3"  >
+                        <Button type="submit" className="btn btn-primary">Se connecter</Button>
+                        <Button type="button" className="btn btn-secondary">S&apos;inscrire</Button>
                     </div>
                 </form>
             </div>

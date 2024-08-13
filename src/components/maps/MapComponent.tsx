@@ -8,7 +8,7 @@ const MapComponent = () => {
         if (typeof window !== 'undefined') {
             const map = L.map("map", {
                 center: [50.406379, 3.893144], // Coordonnées pour Rue de France 23, 7080 Frameries
-                zoom: 15,
+                zoom: 100,
                 layers: [
                     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
