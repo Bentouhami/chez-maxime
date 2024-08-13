@@ -2,19 +2,12 @@
 import { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup, Circle, ZoomControl } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 const MapComponent = () => {
     useEffect(() => {
-        // Vérifier si le code s'exécute côté client
         if (typeof window !== 'undefined') {
-            // Initialiser la carte centrée sur l'adresse
             const map = L.map("map", {
-                center: [50.405048, 3.902564], // Coordonnées pour Rue de France 23, 7080 Frameries
+                center: [50.406379, 3.893144], // Coordonnées pour Rue de France 23, 7080 Frameries
                 zoom: 15,
                 layers: [
                     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -23,7 +16,6 @@ const MapComponent = () => {
                 ]
             });
 
-            // Ajouter un marqueur à l'adresse
             const popupContent = `
                 <b>Boulangerie Chez Maxime</b><br>
                 Rue de France 23, 7080 Frameries<br>
@@ -33,17 +25,27 @@ const MapComponent = () => {
                 </a>
             `;
 
-            L.marker([50.405048, 3.902564]).addTo(map)
+            L.marker([50.406379, 3.893144]).addTo(map)
                 .bindPopup(popupContent)
                 .openPopup();
 
+            // Redimensionner la carte lors du redimensionnement de la fenêtre
+            const handleResize = () => {
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 200);
+            };
+
+            window.addEventListener('resize', handleResize);
+
             return () => {
+                window.removeEventListener('resize', handleResize);
                 map.remove();
             };
         }
     }, []);
 
-    return <div className="rounded-3" id="map" style={{ height: "400px", width: "100%" }}></div>;
+    return <div className="rounded-3" id="map" style={{ height: "400px", width: "100%" }} />;
 };
 
 export default MapComponent;

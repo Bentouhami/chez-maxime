@@ -25,6 +25,7 @@
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.427.0",
+    "mapbox-gl": "^3.5.2",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "nodemailer": "^6.9.14",
@@ -36,7 +37,7 @@
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "vercel": "^35.2.4",
+    "vercel": "^32.3.0",
     "zod": "^3.23.8",
     "zod-prisma-types": "^3.1.8"
   },
