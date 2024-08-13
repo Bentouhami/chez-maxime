@@ -2,13 +2,13 @@
 
 import {NextRequest, NextResponse} from 'next/server';
 import {errorHandler} from "@/app/utils/handelErrors";
-import {prisma} from "@/app/utils/db";
 import {loginUserSchema} from "@/app/utils/validationSchema";
 import bcrypt from "bcryptjs";
 import {LoginUserDto} from "@/app/utils/dtos";
-import {User} from "@prisma/client";
 import {setCookie} from "@/app/utils/generateToken";
 import {JWTPayload} from "@/app/utils/types";
+import prisma from "@/app/utils/db";
+import {User} from "@prisma/client";
 
 /**
  * @method POST
