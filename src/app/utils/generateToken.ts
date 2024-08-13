@@ -1,8 +1,8 @@
 // /src/app/utils/generateToken.ts : génération de jeton
 
-import jwt from "jsonwebtoken";
 import { JWTPayload } from "@/app/utils/types";
 import { serialize } from "cookie";
+import jwt from "jsonwebtoken";
 
 /**
  * Generate a JWT token
@@ -27,7 +27,7 @@ export function generateJwt(jwtPayload: JWTPayload) {
  * @returns {string}
  */
 export function setCookie(jwtPayload: JWTPayload): string {
-    const cookieName = process.env.COOKIE_NAME;
+    const cookieName = process.env.COOKIE_NAME as string;
     if (!cookieName) {
         throw new Error("COOKIE_NAME environment variable is not set");
     }

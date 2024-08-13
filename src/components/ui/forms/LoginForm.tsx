@@ -10,7 +10,7 @@ const LoginForm = () => {
             <div className="container card bg-light show-form w-50 shadow-lg">
                 <form className="card-body ">
                     <div className="mb-3">
-                        <label htmlFor="username" className="form-label right-8 ">Nom d'utilisateur</label>
+                            <label htmlFor="username" className="form-label right-8 ">Nom d&apos;utilisateur</label>
                         <input type="text" className="form-control border-pink-500 border-3 " id="email" placeholder="Entrer votre email"/>
                     </div>
                     <div className="mb-3">
@@ -19,7 +19,7 @@ const LoginForm = () => {
                     </div>
                     <div className="container d-grid gap-2 small">
                         <button type="submit" className="btn btn-primary">Se connecter</button>
-                        <button type="button" className="btn btn-secondary">S'inscrire</button>
+                        <button type="button" className="btn btn-secondary">S&apo;snscrire</button>
                     </div>
                 </form>
             </div>

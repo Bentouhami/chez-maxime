@@ -2,7 +2,7 @@
 
 import { Card } from "react-bootstrap";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product }: any) => {
     return (
         <Card>
             <Card.Img variant="top" src="https://placehold.co/600x400?text=produits+Maxime" alt={product.name} />

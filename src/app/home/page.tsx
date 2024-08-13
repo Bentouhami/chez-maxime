@@ -12,7 +12,7 @@ const HomePage = () => {
 
                 <div className="text-center order-2 order-md-1">
                     <h1 className={Styles.description}>
-                        Bienvenue Chez Maxime, votre boulangerie d'excellence. Voici les produits que nous proposons.
+                        Bienvenue Chez Maxime, votre boulangerie d&apos;avenir
                         <br/>
                     </h1>
                     <Link href="/login" passHref>

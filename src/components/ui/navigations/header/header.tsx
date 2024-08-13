@@ -72,7 +72,7 @@ const Header = () => {
                                     onClick={handleSelect}>Se connecter</Button>
                         </Link>
                         <Link href="/register" passHref>
-                            <Button variant="outline-primary" onClick={handleSelect}>S'inscrire
+                            <Button variant="outline-primary" onClick={handleSelect}>S&apos;inscrire
                             </Button>
                         </Link>
                     </div>
