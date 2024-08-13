@@ -1,0 +1,46 @@
+/* components/Header.module.css */
+.navLinks {
+    gap: 10px; /* Ajoute un espace de 10px entre les éléments de navigation */
+}
+
+.navLink {
+    margin: 5px 0; /* Ajoute de la marge verticale entre les liens de navigation pour les versions mobiles */
+}
+
+.navLink:hover {
+
+    color: rgba(255, 0, 98, 0.97); /* Change la couleur de la police lorsque l'utilisateur survole un lien */
+    scale: 1.05; /* Augmente la taille de la police lorsque l'utilisateur survole un lien */
+    text-decoration: none;
+    /*font-size: 24px;*/
+
+}
+
+@media (min-width: 992px) {
+    .navLink {
+        margin: 0; /* Réinitialise la marge verticale pour les versions desktop */
+    }
+}
+
+.logoBrand {
+    /*margin-top: 20px;*/
+    display: flex;
+    align-items: center;
+}
+
+/*.logo {*/
+/*    color: rgb(255, 0, 98);*/
+/*    !*rotate: 120deg;*!*/
+/*    font-size: 1rem;*/
+/*    margin: 0 1px; !* Ajuster l'espace autour de l'icône *!*/
+/*}*/
+
+.logo:hover {
+    color: rgba(255, 0, 98, 0.97);
+    scale: 1.05;
+    text-decoration: none;
+    color: rgb(255, 0, 98);
+    /*rotate: 120deg;*/
+    font-size: 1rem;
+    margin: 0 2px; /* Ajuster l'espace autour de l'icône */
+}

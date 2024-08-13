@@ -1,0 +1,39 @@
+/* HorairesPage.module.css */
+.container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.horairesTitle {
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(255, 0, 98);
+    margin-bottom: 20px;
+}
+
+.horairesList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.horairesList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.jour {
+    font-weight: bold;
+    color: #333;
+}
+
+.heure {
+    color: #555;
+}

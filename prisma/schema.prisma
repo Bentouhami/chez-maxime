@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  name          String?
+  email         String         @unique
+  password      String?
+  address       String?
+  orders        Order[]
+  comments      Comment[]
+  notifications Notification[]
+}
+
+model Admin {
+  id              Int       @id @default(autoincrement())
+  name            String
+  email           String    @unique
+  password        String
+  role_id         Int
+  role            Role      @relation(fields: [role_id], references: [id])
+  managedProducts Product[]
+  managedComments Comment[]
+  managedOrders   Order[]
+}
+
+model Role {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  admins Admin[]
+}
+
+model Bakery {
+  id       Int       @id @default(autoincrement())
+  name     String
+  address  String
+  products Product[]
+  comments Comment[]
+}
+
+model Product {
+  id          Int              @id @default(autoincrement())
+  name        String
+  price       Float
+  quantity    Int
+  image       String
+  category    String
+  bakery_id   Int
+  bakery      Bakery           @relation(fields: [bakery_id], references: [id])
+  comments    Comment[]
+  orderItems  OrderItem[]
+  admin_id    Int
+  admin       Admin            @relation(fields: [admin_id], references: [id])
+  inventories Inventory[]
+  history     ProductHistory[]
+}
+
+model Inventory {
+  id         Int      @id @default(autoincrement())
+  quantity   Int
+  product_id Int
+  product    Product  @relation(fields: [product_id], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model ProductHistory {
+  id         Int      @id @default(autoincrement())
+  price      Float
+  product_id Int
+  product    Product  @relation(fields: [product_id], references: [id])
+  updatedAt  DateTime @default(now())
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  text       String
+  user_id    Int?
+  user       User?    @relation(fields: [user_id], references: [id])
+  bakery_id  Int?
+  bakery     Bakery?  @relation(fields: [bakery_id], references: [id])
+  product_id Int?
+  product    Product? @relation(fields: [product_id], references: [id])
+  admin_id   Int?
+  admin      Admin?   @relation(fields: [admin_id], references: [id])
+}
+
+model Order {
+  id           Int            @id @default(autoincrement())
+  guestEmail   String?
+  orderNumber  String         @unique
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  totalAmount  Float
+  user_id      Int?
+  user         User?          @relation(fields: [user_id], references: [id])
+  admin_id     Int?
+  admin        Admin?         @relation(fields: [admin_id], references: [id])
+  orderItems   OrderItem[]
+  payments     Payment[]
+  history      OrderHistory[]
+  Notification Notification[]
+}
+
+model OrderItem {
+  id         Int     @id @default(autoincrement())
+  quantity   Int
+  price      Float
+  order_id   Int
+  order      Order   @relation(fields: [order_id], references: [id])
+  product_id Int
+  product    Product @relation(fields: [product_id], references: [id])
+}
+
+model OrderHistory {
+  id        Int      @id @default(autoincrement())
+  status    String
+  order_id  Int
+  order     Order    @relation(fields: [order_id], references: [id])
+  updatedAt DateTime @default(now())
+}
+
+model Payment {
+  id        Int      @id @default(autoincrement())
+  amount    Float
+  method    String
+  status    String
+  order_id  Int
+  order     Order    @relation(fields: [order_id], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  message   String
+  user_id   Int?
+  user      User?    @relation(fields: [user_id], references: [id])
+  order_id  Int
+  order     Order    @relation(fields: [order_id], references: [id])
+  createdAt DateTime @default(now())
+}

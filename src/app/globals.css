@@ -1,33 +1,22 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.toast-container {
+  bottom: 20px !important;
+  right: 20px !important;
 }
+/*.logoBrand {*/
+/*  margin-top: 20px;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
+/*.logo {*/
+/*  color: rgb(255, 0, 98);*/
+/*  rotate: 120deg;*/
+/*  font-size: 5rem;*/
+/*  margin: 0 1px; !* Ajuster l'espace autour de l'icône *!*/
+/*}*/
