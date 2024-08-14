@@ -3,38 +3,34 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
   id            Int            @id @default(autoincrement())
-  name          String?
-  email         String         @unique
-  password      String?
+  firtName      String         @db.VarChar(20)
+  lastName      String         @db.VarChar(20)
+  phoneNumber   String         @unique @db.VarChar(255)
+  email         String         @unique @db.VarChar(255)
+  password      String         @db.VarChar(255)
   address       String?
+  gender        Gender?
+  role          Role?          @default(USER)
   orders        Order[]
   comments      Comment[]
   notifications Notification[]
 }
 
-model Admin {
-  id              Int       @id @default(autoincrement())
-  name            String
-  email           String    @unique
-  password        String
-  role_id         Int
-  role            Role      @relation(fields: [role_id], references: [id])
-  managedProducts Product[]
-  managedComments Comment[]
-  managedOrders   Order[]
+enum Gender {
+  MALE
+  FEMALE
 }
 
-model Role {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique
-  admins Admin[]
+enum Role {
+  USER // default value for enums
+  ADMIN
 }
 
 model Bakery {
@@ -47,7 +43,8 @@ model Bakery {
 
 model Product {
   id          Int              @id @default(autoincrement())
-  name        String
+  name        String           @db.VarChar(255)
+  description String           @db.VarChar(255)
   price       Float
   quantity    Int
   image       String
@@ -56,8 +53,6 @@ model Product {
   bakery      Bakery           @relation(fields: [bakery_id], references: [id])
   comments    Comment[]
   orderItems  OrderItem[]
-  admin_id    Int
-  admin       Admin            @relation(fields: [admin_id], references: [id])
   inventories Inventory[]
   history     ProductHistory[]
 }
@@ -87,8 +82,6 @@ model Comment {
   bakery     Bakery?  @relation(fields: [bakery_id], references: [id])
   product_id Int?
   product    Product? @relation(fields: [product_id], references: [id])
-  admin_id   Int?
-  admin      Admin?   @relation(fields: [admin_id], references: [id])
 }
 
 model Order {
@@ -100,8 +93,6 @@ model Order {
   totalAmount  Float
   user_id      Int?
   user         User?          @relation(fields: [user_id], references: [id])
-  admin_id     Int?
-  admin        Admin?         @relation(fields: [admin_id], references: [id])
   orderItems   OrderItem[]
   payments     Payment[]
   history      OrderHistory[]

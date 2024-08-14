@@ -16,7 +16,7 @@ const HomePage = () => {
                         <br/>
                     </h1>
                     <Link href="/login" passHref>
-                        <Button variant="primary" className="mt-3 mb-5 bg-pink-500 border-0">Login</Button>
+                        <Button variant="primary" className="mt-3 mb-5 bg-pink-500 border-0">SE CONNECTER</Button>
                     </Link>
                 </div>
             </div>

@@ -4,18 +4,18 @@ import ProductListWithPagination from "@/components/ui/products/ProductListWithP
 
 const ProduitsPage = () => {
     const products = [
-        { id: 1, name: "Pain Traditionnel", price: "€2.50" },
-        { id: 2, name: "Croissant au Beurre", price: "€1.20" },
-        { id: 3, name: "Baguette", price: "€1.00" },
-        { id: 4, name: "Éclair au Chocolat", price: "€3.00" },
-        { id: 5, name: "Tarte aux Fraises", price: "€4.50" },
-        { id: 6, name: "Pain aux Noix", price: "€2.80" },
-        { id: 7, name: "Pain de Seigle", price: "€3.00" },
-        { id: 8, name: "Pain Complet", price: "€2.60" },
-        { id: 9, name: "Brioche", price: "€3.50" },
-        { id: 10, name: "Chausson aux Pommes", price: "€2.00" },
-        { id: 11, name: "Galette des Rois", price: "€7.50" },
-        { id: 12, name: "Pain aux Raisins", price: "€2.30" }
+        { id: 1, name: "Pain Traditionnel", description: "Pain Traditionnel", price: "€2.50" },
+        { id: 2, name: "Croissant au Beurre", description: "Croissant au Beurre", price: "€1.20" },
+        { id: 3, name: "Baguette", description: "Baguette de pain", price: "€1.00" },
+        { id: 4, name: "Éclair au Chocolat", description: "Éclair au Chocolat", price: "€3.00" },
+        { id: 5, name: "Tarte aux Fraises", description: "Tarte aux Fraises", price: "€4.50" },
+        { id: 6, name: "Pain aux Noix", description: "Pain aux Noix", price: "€2.80" },
+        { id: 7, name: "Pain de Seigle", description: "Pain de Seigle", price: "€3.00" },
+        { id: 8, name: "Pain Complet", description: "Pain Complet", price: "€2.60" },
+        { id: 9, name: "Brioche", description: "Brioche", price: "€3.50" },
+        { id: 10, name: "Chausson aux Pommes", description: "Chausson aux Pommes", price: "€2.00" },
+        { id: 11, name: "Galette des Rois", description: "Galette des Rois", price: "€7.50" },
+        { id: 12, name: "Pain aux Raisins", description: "Pain aux Raisins", price: "€2.30" }
     ];
 
     return (

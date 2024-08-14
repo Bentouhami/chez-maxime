@@ -24,7 +24,7 @@ const Header = () => {
     };
 
     return (
-        <Navbar expand="lg" bg="light" data-bs-theme="light" expanded={expanded}>
+        <Navbar className="sticky-top" expand="lg" bg="light" data-bs-theme="light" expanded={expanded}>
             <Container>
                 <Link href={"/"} passHref>
                     <Navbar.Brand><ChezMaximeBrand /></Navbar.Brand>
@@ -69,10 +69,10 @@ const Header = () => {
                     <div className="d-flex flex-column flex-lg-row justify-content-end">
                         <Link href="/login" passHref>
                             <Button variant="outline-primary" className="me-lg-2 mb-2 mb-lg-0"
-                                    onClick={handleSelect}>Se connecter</Button>
+                                    onClick={handleSelect}>SE CONNECTER</Button>
                         </Link>
                         <Link href="/register" passHref>
-                            <Button variant="outline-primary" onClick={handleSelect}>S&apos;inscrire
+                            <Button variant="outline-primary" onClick={handleSelect}>S&apos;INSCRIRE
                             </Button>
                         </Link>
                     </div>
