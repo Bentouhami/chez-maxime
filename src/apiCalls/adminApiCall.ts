@@ -1,10 +1,9 @@
 // apiCalls/adminApiCall.ts : /api/comments
-
-import {DOMAIN} from "../../src/utils/constants";
-import {Comment} from "@prisma/client";
+import { DOMAIN } from "@/utils/constants";
+import { CommentWithUser } from "@/utils/types";
 
 // Get all comments
-export async function getAllComments(token: string): Promise<Comment[]> {
+export async function getAllComments(token: string): Promise<CommentWithUser[]> {
     const response = await fetch(`${DOMAIN}/api/comments`, {
         headers: {
             Cookie: `jwtToken=${token}`

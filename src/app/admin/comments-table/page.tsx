@@ -1,11 +1,10 @@
 // /src/app/admin/comments-table/page.tsx
-
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifyTokenForPage } from "@/utils/verifyToken";
 import DeleteCommentButton from "./DeleteCommentButton";
 import { getAllComments } from "@/apiCalls/adminApiCall";
-import {Comment} from "@prisma/client";
+import { CommentWithUser } from "@/utils/types";
 
 const AdminCommentsTable = async () => {
     const token = cookies().get("jwtToken")?.value;
@@ -14,7 +13,8 @@ const AdminCommentsTable = async () => {
     const payload = verifyTokenForPage(token);
     if (payload?.isAdmin === false) redirect("/");
 
-   const  comments : Comment[] = await getAllComments(token);
+    // Update the type to CommentWithUser[]
+    const comments: CommentWithUser[] = await getAllComments(token);
 
     return (
         <section className="p-5">
@@ -32,10 +32,9 @@ const AdminCommentsTable = async () => {
                     <tr key={comment.id} className="border-b border-t border-gray-300">
                         <td className="p-3 text-gray-700">
                             {comment.text}
-
                         </td>
                         <td className="text-gray-700 p-3 font-normal hidden lg:inline-block">
-                            {new Date(comment.createdAt).toLocaleString()}
+                            {new Date(comment.createdAt).toDateString()}
                         </td>
                         <td>
                             <DeleteCommentButton commentId={comment.id} />
