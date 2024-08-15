@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
             orderBy: { createdAt: 'desc' }
         });
 
-        console.log(`Fetched products:`, products);
+        // console.log(`Fetched products:`, products);
         return NextResponse.json(products, { status: 200 });
     } catch (error) {
         console.error("Error fetching products:", error);

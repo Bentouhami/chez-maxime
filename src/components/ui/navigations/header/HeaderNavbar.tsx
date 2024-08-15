@@ -16,9 +16,10 @@ import LogoutButton from './LogoutButton';
 interface NavbarProps {
     isLoggedIn: boolean; // Ajout de la prop pour vérifier si l'utilisateur est connecté
     userEmail: string | null; // Ajout de la prop pour l'email de l'utilisateur
+    isAdmin: boolean;
 }
 
-const HeaderNavbar = ({isLoggedIn, userEmail }: NavbarProps) => {
+const HeaderNavbar = ({isAdmin, isLoggedIn, userEmail }: NavbarProps) => {
     const [toggle, setToggle] = useState(false);
 
     const handleSelect = () => {

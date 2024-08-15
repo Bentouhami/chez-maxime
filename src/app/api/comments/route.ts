@@ -5,6 +5,7 @@ import prisma from '@/utils/db';
 import { verifyToken } from "@/utils/verifyToken";
 import { CreateCommentDto } from '@/utils/dtos';
 import { createCommentSchema } from '@/utils/validationSchemas';
+import { Comment } from "@prisma/client";
 
 
 /**
@@ -63,15 +64,7 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        const comments = await prisma.comment.findMany({
-            select: {
-                id: true,
-                text: true,
-                createdAt: true,  // Assurez-vous d'inclure ce champ
-                userId: true,
-                product_id: true,
-            }
-        }) ;
+        const comments: Comment[] = await prisma.comment.findMany();
         return NextResponse.json(comments, { status: 200 });
 
     } catch (error) {

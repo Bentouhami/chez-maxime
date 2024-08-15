@@ -1,3 +1,5 @@
+// Admin Products Table Page : /admin/products-table
+
 import {cookies} from "next/headers";
 import {redirect} from "next/navigation";
 import {verifyTokenForPage} from "@/utils/verifyToken";
