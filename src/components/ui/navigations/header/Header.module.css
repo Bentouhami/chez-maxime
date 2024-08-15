@@ -44,3 +44,31 @@
     font-size: 1rem;
     margin: 0 2px; /* Ajuster l'espace autour de l'icône */
 }
+
+.header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    border-bottom: 4px solid rgb(144, 144, 144);
+    background-color: rgb(227, 225, 225);
+    position: relative;
+}
+
+.btn {
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 21px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.btn:hover {
+    background-color: darkblue;
+}
+

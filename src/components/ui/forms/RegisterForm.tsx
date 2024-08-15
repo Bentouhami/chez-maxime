@@ -1,22 +1,29 @@
 'use client';
 
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
-import { createUserDto } from "@/app/utils/dtos";
-import { validateNewUserRegister } from "@/app/utils/validationSchema";
-import { toast, ToastContainer, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Assurez-vous que les styles sont importés
+import React, {useState} from "react";
+import {Button} from "react-bootstrap";
+import {registerSchema} from "@/utils/validationSchemas";
+import {Slide, toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {DOMAIN} from "@/utils/constants";
+import axios from "axios";
+import {useRouter} from 'next/navigation';
 
 const RegisterForm = () => {
+    const router = useRouter();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // Empêche le rechargement de la page
+
         const newUser = {
             email,
             password,
@@ -24,9 +31,10 @@ const RegisterForm = () => {
             firstName,
             lastName,
             phoneNumber
-        } as createUserDto;
+        };
 
-        const validated = validateNewUserRegister.safeParse(newUser);
+        const validated = registerSchema.safeParse(newUser);
+
         if (!validated.success) {
             toast.error(validated.error.errors[0].message, {
                 autoClose: 5000, // 5 seconds
@@ -38,7 +46,26 @@ const RegisterForm = () => {
             });
             return;
         }
+
         // Si la validation est réussie, vous pouvez effectuer d'autres actions ici
+        try {
+            setLoading(true);
+            await axios.post(`${DOMAIN}/api/users/register`, {
+                email,
+                password,
+                confirmPassword,
+                firstName,
+                lastName,
+                phoneNumber
+            });
+            router.replace('/');
+            setLoading(false);
+            router.refresh();
+        } catch (error: any) {
+            toast.error(error?.response?.data.message);
+            console.log(error);
+            setLoading(false);
+        }
         toast.success("Inscription réussie!", {
             autoClose: 5000, // 5 seconds
             hideProgressBar: false,
@@ -51,7 +78,7 @@ const RegisterForm = () => {
 
     return (
         <div className="container p-5 mt-5 mb-5 text-center w-100">
-            <h1>S&apos;inscrire</h1><br />
+            <h1>S&apos;inscrire</h1><br/>
             <div className="container card bg-light show-form w-50 shadow-lg">
                 <form className="card-body" onSubmit={handleSubmit}>
 

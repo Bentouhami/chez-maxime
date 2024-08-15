@@ -8,63 +8,73 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+// User model pour les utilisateurs de l'application (admin et utilisateurs)
 model User {
   id            Int            @id @default(autoincrement())
-  firtName      String         @db.VarChar(20)
+  firstName     String         @db.VarChar(20)
   lastName      String         @db.VarChar(20)
   phoneNumber   String         @unique @db.VarChar(255)
   email         String         @unique @db.VarChar(255)
   password      String         @db.VarChar(255)
-  address       String?
-  gender        Gender?
-  role          Role?          @default(USER)
+  isAdmin       Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   orders        Order[]
   comments      Comment[]
   notifications Notification[]
 }
 
-enum Gender {
-  MALE
-  FEMALE
-}
-
-enum Role {
-  USER // default value for enums
-  ADMIN
-}
-
+// Model pour les Boulangeries (bakeries)
 model Bakery {
-  id       Int       @id @default(autoincrement())
-  name     String
-  address  String
-  products Product[]
-  comments Comment[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  address   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+  comments  Comment[]
 }
 
+// Model pour les produits (products) de la boulangerie
 model Product {
   id          Int              @id @default(autoincrement())
   name        String           @db.VarChar(255)
   description String           @db.VarChar(255)
   price       Float
   quantity    Int
-  image       String
-  category    String
-  bakery_id   Int
-  bakery      Bakery           @relation(fields: [bakery_id], references: [id])
+  image       String? // Image du produit (optionnel)
+  categoryId  Int
+  category    Category         @relation(fields: [categoryId], references: [id])
+  bakery_id   Int? // Id de la boulangerie (optionnel)
+  bakery      Bakery?          @relation(fields: [bakery_id], references: [id])
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   comments    Comment[]
   orderItems  OrderItem[]
   inventories Inventory[]
   history     ProductHistory[]
 }
 
+// Model pour les catégories (categories) des produits
+model Category {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  parentId Int? // Null si c'est une catégorie principale
+  parent   Category?  @relation("Subcategories", fields: [parentId], references: [id])
+  children Category[] @relation("Subcategories")
+  products Product[]
+}
+
+// Model pour les inventaires (inventories) des produits de la boulangerie (stock de produits)
 model Inventory {
   id         Int      @id @default(autoincrement())
-  quantity   Int
-  product_id Int
+  quantity   Int // Quantité de produits stockés dans l'inventaire
+  product_id Int // Id du produit stocké dans l'inventaire
   product    Product  @relation(fields: [product_id], references: [id])
   createdAt  DateTime @default(now())
 }
 
+// Model pour les historiques des produits (productHistory)
 model ProductHistory {
   id         Int      @id @default(autoincrement())
   price      Float
@@ -73,17 +83,21 @@ model ProductHistory {
   updatedAt  DateTime @default(now())
 }
 
+// Model pour les commentaires (comments)  des utilisateurs
 model Comment {
   id         Int      @id @default(autoincrement())
   text       String
-  user_id    Int?
-  user       User?    @relation(fields: [user_id], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     Int?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   bakery_id  Int?
   bakery     Bakery?  @relation(fields: [bakery_id], references: [id])
   product_id Int?
-  product    Product? @relation(fields: [product_id], references: [id])
+  product    Product? @relation(fields: [product_id], references: [id], onDelete: Cascade)
 }
 
+// Model pour les commandes (orders) des utilisateurs
 model Order {
   id           Int            @id @default(autoincrement())
   guestEmail   String?
@@ -91,47 +105,52 @@ model Order {
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   totalAmount  Float
-  user_id      Int?
-  user         User?          @relation(fields: [user_id], references: [id])
-  orderItems   OrderItem[]
+  userId       Int
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderItems   OrderItem[] // Articles commandés par l'utilisateur
   payments     Payment[]
-  history      OrderHistory[]
-  Notification Notification[]
+  history      OrderHistory[] // Historique des commandes des utilisateurs
+  Notification Notification[] // Notifications des utilisateurs
 }
 
+// Model pour les articles (orderItems) des commandes des utilisateurs
 model OrderItem {
-  id         Int     @id @default(autoincrement())
-  quantity   Int
-  price      Float
+  id         Int      @id @default(autoincrement())
+  quantity   Int // Quantité de produits commandés
+  price      Float // Prix de chaque produit commandé
+  createdAt  DateTime @default(now())
   order_id   Int
-  order      Order   @relation(fields: [order_id], references: [id])
+  order      Order    @relation(fields: [order_id], references: [id])
   product_id Int
-  product    Product @relation(fields: [product_id], references: [id])
+  product    Product  @relation(fields: [product_id], references: [id]) // Produit commandé par l'utilisateur
 }
 
+// Model pour les historiques des commandes (orderHistory) des utilisateurs afin de savoir leur statut
 model OrderHistory {
   id        Int      @id @default(autoincrement())
-  status    String
+  status    String // Statut de la commande (payé, en attente, etc.)
   order_id  Int
-  order     Order    @relation(fields: [order_id], references: [id])
+  order     Order    @relation(fields: [order_id], references: [id]) // Commande de l'utilisateur
   updatedAt DateTime @default(now())
 }
 
+// Model pour les paiements (payments) des utilisateurs
 model Payment {
   id        Int      @id @default(autoincrement())
-  amount    Float
-  method    String
-  status    String
+  amount    Float // Montant du paiement (ex: 10€)
+  method    String // Méthode de paiement (ex: carte de crédit)
+  status    String // Statut du paiement (ex: payé, en attente, etc.)
   order_id  Int
-  order     Order    @relation(fields: [order_id], references: [id])
+  order     Order    @relation(fields: [order_id], references: [id]) // Commande de l'utilisateur
   createdAt DateTime @default(now())
 }
 
+// Model pour les notifications (notifications) des utilisateurs
 model Notification {
   id        Int      @id @default(autoincrement())
-  message   String
-  user_id   Int?
-  user      User?    @relation(fields: [user_id], references: [id])
+  message   String // Message de la notification (ex: Nouvelle commande, Nouveau produit, etc.)
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
   order_id  Int
   order     Order    @relation(fields: [order_id], references: [id])
   createdAt DateTime @default(now())

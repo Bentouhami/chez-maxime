@@ -1,29 +1,27 @@
-// if the token is null or invalid,
-// src/middleware.ts
-import {NextRequest, NextResponse} from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
-export const middleware = async (request: NextRequest) => {
+export function middleware(request: NextRequest) {
 
+    const jwtToken = request.cookies.get("jwtToken");
+    const token = jwtToken?.value as string;
 
-    // get the token from the header request
-    const cookie = request.cookies.get("auth");
-    const authToken = cookie?.value as string;
-    // check if the token is null or invalid
-
-    if (!authToken) { // !authToken && request.method === "DELETE" for delete request only
-
-        return NextResponse.json(
-            {message: "No token provided,  access denied from middleware"},
-            {status: 401}
-        );
+    if (!token) {
+        if (request.nextUrl.pathname.startsWith("/api/users/profile/")) {
+            return NextResponse.json(
+                { message: 'no token provided, access denied' },
+                { status: 401 } // Unauthorized
+            );
+        }
+    } else {
+        if (
+            request.nextUrl.pathname === "/login" ||
+            request.nextUrl.pathname === "/register"
+        ) {
+            return NextResponse.redirect(new URL("/", request.url));
+        }
     }
 }
 
-// export the middleware function config for matcher routes
 export const config = {
-    matcher: [
-        "/api/v1/users/profile/:path*",
-        "/api/v1/users/login",
-        "/api/v1/users/register",
-    ],
+    matcher: ["/api/users/profile/:path*", "/login", "/register"]
 }

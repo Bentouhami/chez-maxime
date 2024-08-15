@@ -19,6 +19,7 @@
     "@types/toastify-js": "^1.12.3",
     "@types/validatorjs": "^3.15.5",
     "@vercel/postgres": "^0.9.0",
+    "axios": "^1.7.4",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.0",
@@ -32,12 +33,14 @@
     "material-react-toastify": "^10.0.5",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
+    "next-cloudinary": "^6.10.0",
     "nodemailer": "^6.9.14",
     "react": "^18",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "react-leaflet": "^4.2.1",
+    "react-modal": "^3.16.1",
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
@@ -52,6 +55,7 @@
     "@types/node": "^20.14.15",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-modal": "^3.16.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
@@ -59,5 +63,8 @@
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} seed.js"
   }
 }

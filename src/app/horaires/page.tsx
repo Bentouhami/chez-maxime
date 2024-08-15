@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './HorairesPage.module.css';
+import {Metadata} from "next";
 
 const HorairesPage = () => {
     return (
@@ -33,3 +34,7 @@ const HorairesPage = () => {
 }
 
 export default HorairesPage;
+export const metadata: Metadata = {
+    title: 'Horaires Page',
+    description: 'Articles about programming',
+}

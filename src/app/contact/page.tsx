@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { CiMap, CiPhone } from "react-icons/ci";
+import {Metadata} from "next";
 
 // Importer dynamiquement le composant sans SSR
 const MapComponent = dynamic(() => import('@/components/maps/MapComponent'), {
@@ -28,3 +29,8 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+
+export const metadata: Metadata = {
+    title: 'Contact Page',
+    description: 'Articles about programming',
+}

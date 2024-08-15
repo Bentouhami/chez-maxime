@@ -6,29 +6,32 @@ import React from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import Header from "@/components/ui/navigations/header/header";
 import Footer from "@/components/ui/navigations/footer/Footer";
+import {ToastContainer} from "react-toastify";
 
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
-  title: "Chez Maxime",
-  description: "Votre Boulangerie chez Maxime",
+    title: "Boulangerie Chez Maxime",
+    description: "Votre Boulangerie chez Maxime",
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
 }>) {
-  return (
-      <html lang="en">
-      <body className={inter.className} data-theme="dark">
-      < Header />
-      <main>
-        {children}
-      </main>
-      <Footer/>
-      </body>
-      </html>
-  );
+    return (
+        <html lang="en">
+        <body className={inter.className} data-theme="dark">
+        < Header/>
+        <ToastContainer theme='colored' position='top-center' autoClose={3000} closeOnClick={true} pauseOnHover={false}/>
+
+        <main>
+            {children}
+        </main>
+        <Footer/>
+        </body>
+        </html>
+    );
 }

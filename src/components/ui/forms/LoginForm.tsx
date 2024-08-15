@@ -1,32 +1,39 @@
 // LoginForm.tsx : Composant React pour le formulaire de connexion
 'use client';
-import React, { useState} from 'react';
-import { Button } from "react-bootstrap";
-import { useRouter } from "next/navigation";
-import {loginUserSchema} from "@/app/utils/validationSchema";
+import React, {useState} from 'react';
+import {Button} from "react-bootstrap";
+import {useRouter} from "next/navigation";
+import {loginSchema} from "@/utils/validationSchemas";
 import {Slide, toast, ToastContainer} from "react-toastify";
-import {loginUserDto} from "@/app/utils/dtos"; // Import correct pour Next.js 13+
+import {LoginUserDto} from "@/utils/dtos";
+import axios from "axios"; // Import correct pour Next.js 13+
+import {DOMAIN} from '@/utils/constants';
 
 const LoginForm = () => {
     const router = useRouter();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [loading, setLoading] = useState(false);
 
 
     const handelRegister = () => {
         router.push("/register");
     };
 
-    function handelSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handelSubmit(e: React.FormEvent<HTMLFormElement>) {
+
         e.preventDefault(); // Empêche le rechargement de la page
+
+
         const newUser = {
             email,
             password,
 
-        } as loginUserDto;
+        } as LoginUserDto;
 
-        const validated = loginUserSchema.safeParse(newUser);
+        const validated = loginSchema.safeParse(newUser);
         if (!validated.success) {
             toast.error(validated.error.errors[0].message, {
                 autoClose: 5000, // 5 seconds
@@ -39,6 +46,18 @@ const LoginForm = () => {
             return;
         }
         // Si la validation est réussie, vous pouvez effectuer d'autres actions ici
+        try {
+            setLoading(true);
+            await axios.post(`${DOMAIN}/api/users/login`, {email, password});
+            router.replace('/');
+            setLoading(false);
+            router.refresh();
+        } catch (error: any) {
+            toast.error(error?.response?.data.message);
+            console.log(error);
+            setLoading(false);
+        }
+
         toast.success("Connexion réussie!", {
             autoClose: 5000, // 5 seconds
             hideProgressBar: false,
@@ -51,7 +70,7 @@ const LoginForm = () => {
 
     return (
         <div className="d-flex flex-column justify-content-center align-items-center mt-5 mb-5 text-center w-100">
-            <h1>Se connecter</h1><br />
+            <h1>Se connecter</h1><br/>
             <div className="container card bg-light show-form w-50 shadow-lg">
                 <form className="card-body" onSubmit={handelSubmit}>
                     <div className="mb-3">

@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from 'next/server';
-import {errorHandler} from '@/app/utils/handelErrors';
+import {errorHandler} from '@/utils/handelErrors';
 import {cookies} from 'next/headers';
 
 /** logout route.ts
@@ -12,7 +12,7 @@ import {cookies} from 'next/headers';
 export async function GET(request: NextRequest) {
     try {
         // get auth token from header request and delete it
-        cookies().delete("auth");
+        cookies().delete("jwtToken");
         return NextResponse.json(
             {message: "Logged out"},
             {status: 200}

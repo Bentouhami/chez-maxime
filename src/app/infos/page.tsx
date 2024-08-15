@@ -1,4 +1,5 @@
 import React from 'react'
+import type {Metadata} from "next";
 
 const InfosPage = () => {
     return (
@@ -6,3 +7,7 @@ const InfosPage = () => {
     )
 }
 export default InfosPage
+export const metadata: Metadata = {
+    title: 'Infos Page',
+    description: 'Articles about programming',
+}
