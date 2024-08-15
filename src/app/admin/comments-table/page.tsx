@@ -4,17 +4,19 @@ import { redirect } from "next/navigation";
 import { verifyTokenForPage } from "@/utils/verifyToken";
 import DeleteCommentButton from "./DeleteCommentButton";
 import { getAllComments } from "@/apiCalls/adminApiCall";
-import { CommentWithUser } from "@/utils/types";
+import { Comment } from "@prisma/client";
+import {CommentWithUser} from "@/utils/types";
 
 const AdminCommentsTable = async () => {
     const token = cookies().get("jwtToken")?.value;
-    if (!token) redirect("/");
+    if(!token) redirect("/");
 
     const payload = verifyTokenForPage(token);
-    if (payload?.isAdmin === false) redirect("/");
+    if(payload?.isAdmin === false) redirect("/");
 
-    // Update the type to CommentWithUser[]
-    const comments: CommentWithUser[] = await getAllComments(token);
+    const comments: Comment[] = await getAllComments(token);
+    console.log("comments returned from  /api/comments route ", comments);
+
 
     return (
         <section className="p-5">

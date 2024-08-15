@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        const comments: Comment[] = await prisma.comment.findMany();
+        const comments= await prisma.comment.findMany();
 
         console.log("comments returned from  /api/comments route ", comments);
 

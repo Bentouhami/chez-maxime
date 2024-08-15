@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from "@/components/ui/navigations/header/header";
 import Footer from "@/components/ui/navigations/footer/Footer";
 import {ToastContainer} from "react-toastify";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 const inter = Inter({subsets: ["latin"]});
@@ -29,6 +30,7 @@ export default function RootLayout({
 
         <main>
             {children}
+            <SpeedInsights />
         </main>
         <Footer/>
         </body>
