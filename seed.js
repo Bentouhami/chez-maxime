@@ -1,5 +1,5 @@
 // seed.js
-const { PrismaClient } = require('@prisma/client');
+const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
@@ -9,10 +9,10 @@ async function main() {
             name: 'Boulangerie',
             children: {
                 create: [
-                    { name: 'Pains blancs' },
-                    { name: 'Pains gris' },
-                    { name: 'Fine boulangerie' },
-                    { name: 'Viennoiseries' },
+                    {name: 'Pains blancs'},
+                    {name: 'Pains gris'},
+                    {name: 'Fine boulangerie'},
+                    {name: 'Viennoiseries'},
                 ]
             }
         }
@@ -23,10 +23,10 @@ async function main() {
             name: 'Pâtisserie',
             children: {
                 create: [
-                    { name: 'Pâtisseries' },
-                    { name: 'Tartes' },
-                    { name: 'Chocolats, macarons et massepains' },
-                    { name: 'Gâteaux' },
+                    {name: 'Pâtisseries'},
+                    {name: 'Tartes'},
+                    {name: 'Chocolats, macarons et massepains'},
+                    {name: 'Gâteaux'},
                 ]
             }
         }
@@ -37,7 +37,7 @@ async function main() {
             name: 'Pizzas',
             children: {
                 create: [
-                    { name: 'Pizzas' }
+                    {name: 'Pizzas'}
                 ]
             }
         }
@@ -48,20 +48,40 @@ async function main() {
             name: 'Sandwicherie',
             children: {
                 create: [
-                    { name: 'Sandwichs garnis' }
+                    {name: 'Sandwichs garnis'}
                 ]
             }
         }
     });
 
-    console.log('Categories and subcategories seeded successfully');
+    // Ajouter des boulangeries
+    const boulangerie1 = await prisma.bakery.create({
+        data: {
+            name: 'Boulangerie 1',
+            address: 'Rue de boulangerie 1, 7000 Mons - Belgique',
+            phone: '0458798798',
+        }
+    });
+
+    const boulangerie2 = await prisma.bakery.create({
+        data: {
+            name: 'Boulangerie 2',
+            address: 'Rue de boulangerie 2, 7080 Frameries - Belgique',
+            phone: '0458798799',
+        }
+    });
+
+    //
 }
 
-main()
-    .catch(e => {
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+    console.log('Categories and subcategories seeded successfully');
+
+
+    main()
+        .catch(e => {
+            console.error(e);
+            process.exit(1);
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });

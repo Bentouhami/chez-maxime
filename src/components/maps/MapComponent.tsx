@@ -17,8 +17,8 @@ const MapComponent = () => {
             });
 
             const popupContent = `
-                <b>Boulangerie Chez Maxime</b><br>
-                Rue de France 23, 7080 Frameries<br>
+                <b>Boulangerie de Coin</b><br>
+                Rue des Coins, 7080 Frameries - Belgique<br>
                 <a href="https://maps.app.goo.gl/SmuAiDnE1se7kDDH9" target="_blank" rel="noopener noreferrer">
                 <img src="/chez-maxime-map-photo.jpg" alt="Google Maps" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 8px;" />
                     Ouvrir dans Google Maps

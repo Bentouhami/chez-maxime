@@ -33,6 +33,14 @@
   padding: 20px;
 }
 
+.description {
+  color: rgba(255, 0, 98, 0.97);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px;
+}
+
 
 
 

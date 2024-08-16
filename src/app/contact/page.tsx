@@ -9,16 +9,16 @@ const MapComponent = dynamic(() => import('@/components/maps/MapComponent'), {
 
 const ContactPage = () => {
     return (
-        <div className="container-fluid d-flex card border-0 justify-content-center align-items-center mt-5">
-            <div className="m-3 rounded-1 d-flex justify-content-center align-items-center mt-5 mb-2 text-white col-md-6 text-center align-items-center" style={{ background: 'rgb(255, 0, 98)' }}>
-                <p className="mb-0 text-uppercase fw-bold">Boulangerie Chez Maxime</p>
+        <div className=" vh-100 container d-flex card border-0 justify-content-center align-items-center ">
+            <div className="w-100 rounded-1 d-flex justify-content-center align-items-center mb-2 text-white col-md-6 text-center align-items-center" style={{ background: 'rgb(255, 0, 98)' }}>
+                <p className="text-uppercase fw-bold">Boulangerie de Coin</p>
                 <p className="flex text-center card-text">
-                    <CiMap size={20} className="me-3" />
-                    Rue de France 23, 7080, Frameries - Belgique
+                    <CiMap size={30} />
+                    Rue des Coins, 7080, Frameries - Belgique
                 </p>
                 <p className="flex">
-                    <CiPhone size={20} className="me-3" />
-                    0494/ 33 37 97 (Maxime DEMAREZ)
+                    <CiPhone size={30}  />
+                    0445/ 33 37 97
                 </p>
             </div>
             <div className="d-flex justify-content-center align-items-center mt-3 w-100">

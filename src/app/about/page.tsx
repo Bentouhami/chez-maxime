@@ -3,7 +3,9 @@ import {Metadata} from "next";
 
 const AboutPage = () => {
     return (
-        <div>AboutPage</div>
+        <div className={"container vh-100 d-flex flex-column justify-content-center align-items-center"}>
+            <h1 className={"text-center"}>About</h1>
+        </div>
     )
 }
 export default AboutPage
