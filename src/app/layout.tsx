@@ -1,16 +1,14 @@
-import type {Metadata} from "next";
-import {Inter} from "next/font/google";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Header from "@/components/ui/navigations/header/header";
 import Footer from "@/components/ui/navigations/footer/Footer";
-import {ToastContainer} from "react-toastify";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
-
-const inter = Inter({subsets: ["latin"]});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Boulangerie Chez Maxime",
@@ -25,14 +23,12 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body className={inter.className} data-theme="dark">
-        < Header/>
-        <ToastContainer theme='colored' position='top-center' autoClose={3000} closeOnClick={true} pauseOnHover={false}/>
-
+        <Header />
         <main>
             {children}
             <SpeedInsights />
         </main>
-        <Footer/>
+        <Footer />
         </body>
         </html>
     );
