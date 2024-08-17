@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 
+
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import 'leaflet/dist/leaflet.css'
 import Header from "@/ui/navigations/header/header";

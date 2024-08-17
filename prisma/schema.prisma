@@ -36,13 +36,23 @@ model Bakery {
   comments  Comment[]
 }
 
-// Model pour les produits (products) de la boulangerie
+// Enum pour les unités de mesure des produits
+enum Unit {
+  KG // Kilogramme
+  G // Gramme
+  MG // Milligramme
+  L // Litre
+  ML // Millilitre
+  T // Tonne
+}
+
 model Product {
   id          Int              @id @default(autoincrement())
   name        String           @db.VarChar(255)
   description String           @db.VarChar(255)
-  price       Float
+  price       Decimal          @db.Decimal(10, 2)
   quantity    Int
+  unit        Unit? // Unité de mesure du produit (optionnel)
   image       String? // Image du produit (optionnel)
   categoryId  Int
   category    Category         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
