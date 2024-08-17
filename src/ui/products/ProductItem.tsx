@@ -35,7 +35,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                 {product.description}
             </p>
             <p className="my-2 text-xl text-gray-700 p-1 line-clamp-1">
-                {product.price.toNumber()} €
+                {product.price} €
             </p>
             <Link
                 className="text-xl bg-purple-700 hover:bg-purple-800 w-full block text-center p-1 text-white rounded-lg"
