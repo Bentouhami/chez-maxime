@@ -4,10 +4,11 @@ import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "@/components/ui/navigations/header/header";
-import Footer from "@/components/ui/navigations/footer/Footer";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import 'leaflet/dist/leaflet.css'
+import Header from "@/ui/navigations/header/header";
+import Footer from "@/ui/navigations/footer/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

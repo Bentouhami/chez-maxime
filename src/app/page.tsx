@@ -1,7 +1,7 @@
 // home page.tsx component for the home page.tsx of the application
-import HomePageImage from "@/components/ui/HomePageImage";
 import Link from "next/link";
 import {Button} from "react-bootstrap";
+import HomePageImage from "@/ui/HomePageImage";
 
 export default function Home() {
     return (

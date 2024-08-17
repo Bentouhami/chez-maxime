@@ -77,9 +77,9 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className="container p-5 mt-5 mb-5 text-center w-100">
+        <div className="container vh-100 d-flex flex-column justify-content-center align-items-center col-12 mt-5 mb-5 text-center">
             <h1>S&apos;inscrire</h1><br/>
-            <div className="container card bg-light show-form w-50 shadow-lg">
+            <div className="card bg-light show-form w-100 w-md-75 w-lg-50 shadow-lg">
                 <form className="card-body" onSubmit={handleSubmit}>
 
                     <div className="mb-3">

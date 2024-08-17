@@ -5,7 +5,6 @@ import { verifyTokenForPage } from "@/utils/verifyToken";
 import DeleteCommentButton from "./DeleteCommentButton";
 import { getAllComments } from "@/apiCalls/adminApiCall";
 import { Comment } from "@prisma/client";
-import {CommentWithUser} from "@/utils/types";
 
 const AdminCommentsTable = async () => {
     const token = cookies().get("jwtToken")?.value;

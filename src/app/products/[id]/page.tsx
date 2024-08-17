@@ -1,11 +1,13 @@
 //import { getSingleArticle } from "@/apiCalls/articleApiCall";
-import AddCommentForm from "@/components/ui/comments/AddCommentForm";
-import CommentItem from "@/components/ui/comments/CommentItem";
+import AddCommentForm from "@/ui/comments/AddCommentForm";
+import CommentItem from "@/ui/comments/CommentItem";
 import {cookies} from "next/headers";
 import {verifyTokenForPage} from "@/utils/verifyToken";
 import prisma from "@/utils/db";
 import {redirect} from "next/navigation";
 import {SingleProduct} from "@/utils/types";
+import {Button} from "react-bootstrap";
+import Link from "next/link";
 
 interface SingleProductPageProps {
     params: { id: string }
@@ -17,6 +19,7 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
 
     //const product: SingleArticle = await getSingleArticle(params.id);
 
+    // récupération du produit avec les commentaires
     const product = await prisma.product.findUnique({
         where: { id: parseInt(params.id) },
         include: {
@@ -42,10 +45,13 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
     }
 
     return (
-        <section className="fix-height container m-auto w-full px-5 pt-8 md:w-3/4">
+        <section className=" vh-100  container m-auto w-full px-5 pt-8 md:w-3/4">
             <div className="bg-white p-7 rounded-lg mb-7">
+                {/* ajouter une image de produit */}
+
                 <h1 className="text-3xl font-bold text-gray-700 mb-2">
-                    {product.name}
+                    {product.name} le prix:
+                    {product.price.toFixed(2)}€
                 </h1>
                 <div className="text-gray-400">
                     {new Date(product.createdAt).toDateString()}
@@ -56,9 +62,16 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                 {payload ? (
                     <AddCommentForm productId={product.id}/>
                 ) : (
-                    <p className="text-blue-600 md:text-xl">
-                        to write a comment you should log in first
-                    </p>
+                    <div className="text-center">
+                        <p className="text-blue-600 md:text-xl">
+                            Vous devez vous connecter pour commenter.
+                        </p>
+                        <Link href="/login" passHref>
+                            <Button variant="primary" className="mt-3 mb-5 bg-pink-500 border-0">
+                                SE CONNECTER
+                            </Button>
+                        </Link>
+                    </div>
                 )}
             </div>
             <h4 className="text-xl text-gray-800 ps-1 font-semibold mb-2 mt-7">

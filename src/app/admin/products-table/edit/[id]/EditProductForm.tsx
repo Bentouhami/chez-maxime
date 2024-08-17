@@ -5,16 +5,18 @@ import axios from 'axios';
 import { DOMAIN } from '@/utils/constants';
 import { useRouter } from 'next/navigation';
 import { Product, Category } from '@prisma/client';
+// import { Decimal } from '@prisma/client/runtime';
 
 interface EditProductFormProps {
     product: Product;
 }
+// Assurez-vous d'importer le type Decimal si ce n'est pas déjà fait
 
 const EditProductForm = ({ product } : EditProductFormProps) => {
     const router = useRouter();
     const [name, setName] = useState(product.name);
     const [description, setDescription] = useState(product.description);
-    const [price, setPrice] = useState(product.price);
+    const [price, setPrice] = useState<number>(product.price.toNumber());  // Convertir Decimal en number
     const [quantity, setQuantity] = useState(product.quantity);
     const [categoryId, setCategoryId] = useState(product.categoryId);
     const [categories, setCategories] = useState<Category[]>([]);

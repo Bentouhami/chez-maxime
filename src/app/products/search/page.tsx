@@ -1,6 +1,6 @@
 import { getProductsBasedOnSearch } from '@/apiCalls/productApiCall';
 import { Product } from '@prisma/client';
-import ProductItem from "@/components/ui/products/ProductItem";
+import ProductItem from "@/ui/products/ProductItem";
 
 interface SearchProductPageProps {
   searchParams: { searchText: string };

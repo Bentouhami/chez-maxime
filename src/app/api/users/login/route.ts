@@ -52,8 +52,12 @@ export async function POST(request: NextRequest) {
         const jwtPayload: JWTPayload = {
             id: user.id,
             isAdmin: user.isAdmin,
-            userEmail: user.email
+            userEmail: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName
         };
+        console.log(jwtPayload);
+
         // Générez un cookie et retournez l'objet de réponse utilisateur
         const cookie = setCookie(jwtPayload);
         return NextResponse.json(

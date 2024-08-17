@@ -43,6 +43,8 @@ export async function POST(request: NextRequest) {
             select: {
                 id: true,
                 email: true,
+                firstName: true,
+                lastName: true,
                 isAdmin: true,
             }
         });
@@ -52,7 +54,10 @@ export async function POST(request: NextRequest) {
         const cookie = setCookie({
             id: newUser.id,
             userEmail: newUser.email,
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
             isAdmin: newUser.isAdmin,
+
         });
 
         return NextResponse.json(

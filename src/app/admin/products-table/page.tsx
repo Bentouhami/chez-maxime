@@ -8,7 +8,7 @@ import {Product} from "@prisma/client";
 import Link from "next/link";
 import {getProducts} from '@/apiCalls/productApiCall';
 import prisma from "@/utils/db";
-import Pagination from "@/components/ui/products/Pagination";
+import Pagination from "@/ui/products/Pagination";
 import DeleteProductButton from "./DeleteProductButton";
 
 interface AdminProductsTableProps{

@@ -5,7 +5,7 @@ import Link from "next/link";
 import {Button} from "react-bootstrap";
 import dynamic from "next/dynamic";
 
-const MapComponent = dynamic(() => import('@/components/maps/MapComponent'), {
+const MapComponent = dynamic(() => import('@/ui/maps/MapComponent'), {
     ssr: false
 });
 const HorairesPage = () => {

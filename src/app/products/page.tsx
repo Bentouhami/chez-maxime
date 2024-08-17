@@ -4,9 +4,9 @@ import { PRODUCT_PER_PAGE } from "@/utils/constants";
 import {Product} from "@prisma/client";
 import prisma from "@/utils/db";
 import {getProducts} from "@/apiCalls/productApiCall";
-import ProductItem from "@/components/ui/products/ProductItem";
-import SearchProductInput from "@/components/ui/products/SearchProductInput";
-import Pagination from "@/components/ui/products/Pagination";
+import SearchProductInput from "@/ui/products/SearchProductInput";
+import ProductItem from "@/ui/products/ProductItem";
+import Pagination from "@/ui/products/Pagination";
 
 interface ProductsPageProps {
   searchParams: { pageNumber: string }

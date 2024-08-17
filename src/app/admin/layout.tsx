@@ -1,6 +1,8 @@
-import React from "react"
+// AdminDashboardLayout.tsx : Layout pour les pages d'administration
+
+import React from "react";
 import AdminSidebar from "./AdminSidebar";
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 
 interface AdminDashboardLayoutProps {
     children: React.ReactNode;
@@ -11,11 +13,11 @@ export const metadata: Metadata = {
     description: 'This is admin dashboard',
 }
 
-const AdminDashboardLayout = ({children}: AdminDashboardLayoutProps) => {
+const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
     return (
         <div className="overflow-height flex items-start justify-between overflow-hidden">
-            <div className="overflow-height w-15 lg:w-1/5 bg-pink-700 text-white p-1 lg:p-5">
-                <AdminSidebar/>
+            <div className="overflow-height w-1/5 lg:w-1/5 bg-pink-700 text-white p-1 lg:p-5">
+                <AdminSidebar />
             </div>
             <div className="overflow-height w-full lg:w-4/5 overflow-y-scroll">
                 {children}

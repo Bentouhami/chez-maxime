@@ -3,7 +3,7 @@ import { CiMap, CiPhone } from "react-icons/ci";
 import {Metadata} from "next";
 
 // Importer dynamiquement le composant sans SSR
-const MapComponent = dynamic(() => import('@/components/maps/MapComponent'), {
+const MapComponent = dynamic(() => import('@/ui/maps/MapComponent'), {
     ssr: false
 });
 

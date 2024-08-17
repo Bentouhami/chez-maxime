@@ -18,8 +18,8 @@ const LogoutButton = () => {
     }
 
     return (
-        <button onClick={logoutHandler} className="bg-gray-700 text-gray-200 px-1 rounded">
-            Logout
+        <button onClick={logoutHandler} className=" bg-gray-700 text-gray-200 p-2 rounded">
+            Se déconnecter
         </button>
     )
 }

@@ -1,11 +1,10 @@
 "use client";
-import { useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import { Navbar } from "react-bootstrap";
-import Link from "next/link";
+import React, { useState } from 'react';
+import { Container, Nav, Navbar, Button } from 'react-bootstrap';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
-import ChezMaximeBrand from "@/components/ui/navigations/brand/ChezMaximeBrand";
+import ChezMaximeBrand from "@/ui/navigations/brand/ChezMaximeBrand";
 import { BsBasket, BsChatText } from "react-icons/bs";
 import { TbInfoSquareRounded } from "react-icons/tb";
 import { MdAccessTime } from "react-icons/md";
@@ -14,13 +13,16 @@ import { CiHome } from "react-icons/ci";
 import LogoutButton from './LogoutButton';
 
 interface NavbarProps {
-    isLoggedIn: boolean; // Ajout de la prop pour vérifier si l'utilisateur est connecté
-    userEmail: string | null; // Ajout de la prop pour l'email de l'utilisateur
+    isLoggedIn: boolean;
+    userEmail: string | null;
     isAdmin: boolean;
+    firstName: string;
+    lastName: string;
 }
 
-const HeaderNavbar = ({isAdmin, isLoggedIn, userEmail }: NavbarProps) => {
+const HeaderNavbar: React.FC<NavbarProps> = ({ isAdmin, isLoggedIn, userEmail, firstName, lastName }) => {
     const [toggle, setToggle] = useState(false);
+    const pathname = usePathname();
 
     const handleSelect = () => {
         setToggle(false);
@@ -69,19 +71,34 @@ const HeaderNavbar = ({isAdmin, isLoggedIn, userEmail }: NavbarProps) => {
                             Contact
                         </Link>
                     </Nav>
-                    <div className="d-flex flex-column flex-lg-row justify-content-end">
+                    <div className="d-flex flex-column flex-lg-row justify-content-end align-items-center">
                         {isLoggedIn ? (
-                            <>
-                                <strong className="me-3 text-primary">{userEmail}</strong>
+                            <div className="d-flex flex-column justify-content-center align-items-center mt-3">
+                                <strong>
+                                    {`Bienvenue: ${firstName} ${lastName}`}
+                                    {isAdmin ? ' (admin)' : ' (utilisateur)'}
+                                </strong>
+                                <strong>{userEmail}</strong>
+
+                                {isAdmin && pathname !== '/admin' && (
+                                    <Link href="/admin" passHref legacyBehavior>
+                                        <Button variant="primary" className="mt-3 mb-3 bg-pink-500 border-0">Dashboard</Button>
+                                    </Link>
+                                )}
+
                                 <LogoutButton />
-                            </>
+                            </div>
                         ) : (
                             <>
-                                <Link className="me-3 btn btn-outline-primary" href="/login" passHref>
-                                    SE CONNECTER
+                                <Link href="/login" passHref legacyBehavior>
+                                    <Button variant="outline-primary" className="btn-custom me-lg-2 mb-2 mb-lg-0">
+                                        SE CONNECTER
+                                    </Button>
                                 </Link>
-                                <Link className="btn btn-outline-primary" href="/register" passHref>
-                                    S&apos;INSCRIRE
+                                <Link href="/register" passHref legacyBehavior>
+                                    <Button variant="outline-primary" className="btn-custom">
+                                        S&apos;INSCRIRE
+                                    </Button>
                                 </Link>
                             </>
                         )}

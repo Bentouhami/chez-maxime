@@ -1,12 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+// AddProductForm.tsx : Composant React pour le formulaire d'ajout de produits dans l'administration
+
+
+import React, {useEffect, useState} from "react";
+import {toast} from "react-toastify";
 import axios from "axios";
-import { DOMAIN } from "@/utils/constants";
-import { useRouter } from "next/navigation";
-import { CldUploadWidget } from "next-cloudinary";
-import Image from "next/image";
+import {DOMAIN} from "@/utils/constants";
+import {useRouter} from "next/navigation";
+// import { CldUploadWidget } from "next-cloudinary";
+// import Image from "next/image";
 import Modal from "react-modal";
+import {CldUploadButton, CldUploadWidgetProps} from "next-cloudinary";
 
 // Définir l'interface pour les catégories
 interface Category {
@@ -96,7 +100,7 @@ const AddProductForm = () => {
             const categoryName = (categoryNameInput as HTMLInputElement).value;
 
             try {
-                const response = await axios.post(`${DOMAIN}/api/categories`, { name: categoryName });
+                const response = await axios.post(`${DOMAIN}/api/categories`, {name: categoryName});
                 setCategories([...categories, response.data as Category]);  // Utiliser le type Category ici
                 setCategoryModalOpen(false);
                 toast.success("Nouvelle catégorie ajoutée");
@@ -114,7 +118,7 @@ const AddProductForm = () => {
             const subCategoryName = (subCategoryNameInput as HTMLInputElement).value;
 
             try {
-                const response = await axios.post(`${DOMAIN}/api/subcategories/${selectedCategory}`, { name: subCategoryName });
+                const response = await axios.post(`${DOMAIN}/api/subcategories/${selectedCategory}`, {name: subCategoryName});
 
                 setSubCategories([...subCategories, response.data as Category]);  // Utiliser le type Category ici
                 setSubCategoryModalOpen(false);
@@ -123,6 +127,11 @@ const AddProductForm = () => {
                 toast.error(error?.response?.data.message || "Erreur lors de l'ajout de la sous-catégorie");
             }
         }
+    };
+
+    const handleImageUpload = (result: any) => {
+        console.log(" => ", result);
+
     };
 
     return (
@@ -173,7 +182,7 @@ const AddProductForm = () => {
                 <button
                     type="button"
                     onClick={() => setCategoryModalOpen(true)}
-                    className="ml-2 text-white bg-green-700 hover:bg-green-900 p-2 rounded-lg font-bold"
+                    className="ml-2 text-white bg-green-700 hover:bg-green-900 p-2 rounded-3 font-bold"
                 >
                     Ajouter Catégorie
                 </button>
@@ -197,41 +206,56 @@ const AddProductForm = () => {
                 <button
                     type="button"
                     onClick={() => setSubCategoryModalOpen(true)}
-                    className="ml-2 text-white bg-green-700 hover:bg-green-900 p-2 rounded-lg font-bold"
+                    className="ml-2 text-white bg-green-700 hover:bg-green-900 p-2 rounded-3 font-bold"
                 >
                     Ajouter Sous-catégorie
                 </button>
             </div>
+            <CldUploadButton uploadPreset="n6oappgm"
+                             className="h-48 border-2 mt-4 border-dotted grid place-items-center bg-slate-100 rounded-md"
+                             onSuccess={handleImageUpload}>
 
-            <CldUploadWidget
-                uploadPreset="ml_default"
-                onUpload={(error, result) => {
-                    if (error) {
-                        toast.error("Une erreur est survenue lors du téléchargement de l'image");
-                        return;
-                    }
-                    setImageUrl(result.info.secure_url);
-                    toast.success("Image téléchargée avec succès");
-                }}
-            >
-                {({ open }) => (
-                    <button
-                        type="button"
-                        onClick={() => open()}  // Utilisation d'une fonction anonyme ici
-                        className="text-2xl text-white bg-blue-700 hover:bg-blue-900 p-2 rounded-lg font-bold"
-                    >
-                        Télécharger l&apos;image
-                    </button>
-                )}
-            </CldUploadWidget>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                         stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round"
+                              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+                    </svg>
 
-
-            {imageUrl && (
-                <div className="mt-4">
-                    <Image src={imageUrl} alt="Image téléchargée" className="w-32 h-32 object-cover rounded" />
                 </div>
-            )}
-            <button type="submit" className="text-2xl text-white bg-blue-700 hover:bg-blue-900 p-2 rounded-lg font-bold mt-4">
+
+            </CldUploadButton>
+
+            {/*<CldUploadWidget*/}
+            {/*    uploadPreset="ml_default"*/}
+            {/*    onUpload={(error, result) => {*/}
+            {/*        if (error) {*/}
+            {/*            toast.error("Une erreur est survenue lors du téléchargement de l'image");*/}
+            {/*            return;*/}
+            {/*        }*/}
+            {/*        setImageUrl(result.info.secure_url);*/}
+            {/*        toast.success("Image téléchargée avec succès");*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    {({ open }) => (*/}
+            {/*        <button*/}
+            {/*            type="button"*/}
+            {/*            onClick={() => open()}  // Utilisation d'une fonction anonyme ici*/}
+            {/*            className="text-2xl text-white bg-blue-700 hover:bg-blue-900 p-2 rounded-lg font-bold"*/}
+            {/*        >*/}
+            {/*            Télécharger l&apos;image*/}
+            {/*        </button>*/}
+            {/*    )}*/}
+            {/*</CldUploadWidget>*/}
+
+
+            {/*{imageUrl && (*/}
+            {/*    <div className="mt-4">*/}
+            {/*        <Image src={imageUrl} alt="Image téléchargée" className="w-32 h-32 object-cover rounded" />*/}
+            {/*    </div>*/}
+            {/*)}*/}
+            <button type="submit"
+                    className="text-2xl text-white bg-blue-700 hover:bg-blue-900 p-2 rounded-lg font-bold mt-4">
                 Ajouter
             </button>
 
