@@ -31,7 +31,7 @@ const ProductsBySubcategoryPage = async ({ searchParams }: ProductsBySubcategory
     const pages = Math.ceil(count / PRODUCT_PER_PAGE);
 
     return (
-        <section className="container m-auto px-5">
+        <section className="container m-auto px-5 py-5">
             <div className="flex items-center justify-center flex-wrap gap-7">
                 {products.length > 0 ? (
                     products.map(item => (

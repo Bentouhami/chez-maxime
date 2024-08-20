@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { DOMAIN } from '@/utils/constants';
-import { toast } from 'react-toastify';
+import {DOMAIN} from '@/utils/constants';
+import {toast} from 'react-toastify';
 import Accordion from 'react-bootstrap/Accordion';
 import Link from 'next/link';
+import styles from '../navigations/header/Header.module.css';
+
 
 interface Category {
     id: number;
@@ -60,10 +62,10 @@ const ClientSidebar = () => {
                                 <ul>
                                     {category.subCategories.map((subCategory) => (
                                         <li key={subCategory.id}>
-                                            <Link
+                                            <Link className={styles.navLink}
                                                 href={{
                                                     pathname: '/products/subcategories',
-                                                    query: { subcategoryId: subCategory.id },
+                                                    query: {subcategoryId: subCategory.id},
                                                 }}
                                             >
                                                 {subCategory.name}
