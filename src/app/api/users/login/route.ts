@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
             firstName: user.firstName,
             lastName: user.lastName
         };
-        console.log(jwtPayload);
+        // console.log(jwtPayload); // DEBUG : Afficher le payload JWT
 
         // Générez un cookie et retournez l'objet de réponse utilisateur
         const cookie = setCookie(jwtPayload);

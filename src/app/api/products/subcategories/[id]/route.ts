@@ -1,6 +1,18 @@
+// src/app/api/products/subcategories/[id]/route.ts (Server Route) pour les sous-catégories
+
+
 import { NextResponse } from 'next/server';
 import prisma from '@/utils/db';
 
+/**
+ * @method GET
+ * @access public
+ * @description Get a subcategory by its ID
+ * @param {Request} request
+ * @param {string} id
+ * @returns {Promise<NextResponse>}
+
+ */
 export async function POST(request: Request, { params }: { params: { id: string } }) {
     try {
         const { name } = await request.json();

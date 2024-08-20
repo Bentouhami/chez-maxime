@@ -1,4 +1,5 @@
-// apiCalls/adminApiCall.ts : /api/comments
+// This file contains all the admin API calls that are made to the server
+
 import { DOMAIN } from "@/utils/constants";
 import { Comment } from "@prisma/client";
 

@@ -1,6 +1,16 @@
+// src/app/api/categories/subcategories/route.ts (Server Route)
+
 import { NextResponse } from 'next/server';
 import prisma from '@/utils/db';
 
+
+/**
+ * @method GET
+ * @access public
+ * @description Get all subcategories of a category
+ * @param {Request} request
+ * @returns {Promise<NextResponse>}
+ */
 // Route pour récupérer les sous-catégories d'une catégorie donnée
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);

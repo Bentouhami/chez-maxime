@@ -1,3 +1,5 @@
+// This file contains all the product API calls that are made to the server
+
 import { Product } from '@prisma/client';
 import { DOMAIN } from '@/utils/constants';
 import { SingleProduct } from "@/utils/types";

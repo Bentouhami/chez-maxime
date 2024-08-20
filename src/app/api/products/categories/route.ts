@@ -1,6 +1,15 @@
+// src/app/api/categories/route.ts (Server Route)
+
+
 import { NextResponse } from 'next/server';
 import prisma from '@/utils/db';
 
+/**
+ * @method GET
+ * @access public
+ * @description Get all categories
+ * @returns {Promise<NextResponse>}
+ */
 export async function GET() {
     try {
         const categories = await prisma.category.findMany(
