@@ -1,4 +1,4 @@
-// Products page app/products
+// src/app/products/page.tsx (Client Component) pour la page des produits
 import type { Metadata } from 'next';
 import { PRODUCT_PER_PAGE } from "@/utils/constants";
 import {Product} from "@prisma/client";

@@ -1,4 +1,5 @@
-// home page.tsx component for the home page.tsx of the application
+// page.tsx: src/app/page.tsx component for the home page of the application
+
 import Link from "next/link";
 import {Button} from "react-bootstrap";
 import HomePageImage from "@/ui/HomePageImage";

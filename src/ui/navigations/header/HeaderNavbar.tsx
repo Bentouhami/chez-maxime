@@ -70,6 +70,11 @@ const HeaderNavbar: React.FC<NavbarProps> = ({ isAdmin, isLoggedIn, userEmail, f
                             <BsChatText size={20} className={`me-1 ${styles.logo}`} />
                             Contact
                         </Link>
+                        {/*<Link href="/my-orders" className={`d-flex me-lg-2 my-1 my-lg-0 ${styles.navLink}`}*/}
+                        {/*      onClick={handleSelect}>*/}
+                        {/*    <BsChatText size={20} className={`me-1 ${styles.logo}`} />*/}
+                        {/*    Contact*/}
+                        {/*</Link>*/}
                     </Nav>
                     <div className="d-flex flex-column flex-lg-row justify-content-end align-items-center">
                         {isLoggedIn ? (

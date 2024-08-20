@@ -1,3 +1,5 @@
+// EditProductForm.tsx : Composant React pour le formulaire d'édition de produits dans l'administration
+
 "use client";
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';

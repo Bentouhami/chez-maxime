@@ -20,11 +20,14 @@ interface Category {
 
 const AddProductForm = () => {
     const router = useRouter();
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
     const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+
     const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [subCategories, setSubCategories] = useState<Category[]>([]);
@@ -36,11 +39,11 @@ const AddProductForm = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get(`${DOMAIN}/api/categories`);
+                const response = await axios.get(`${DOMAIN}/api/products/categories`);
                 setCategories(response.data);
             } catch (error) {
                 toast.error("Erreur lors de la récupération des catégories");
-                console.error(error);
+                // console.error(error); // DEBUG ONLY - Remove this line before merging
             }
         };
 
@@ -52,7 +55,7 @@ const AddProductForm = () => {
         if (selectedCategory) {
             const fetchSubCategories = async () => {
                 try {
-                    const response = await axios.get(`${DOMAIN}/api/subcategories?parentId=${selectedCategory}`);
+                    const response = await axios.get(`${DOMAIN}/api/products/subcategories?parentId=${selectedCategory}`);
                     setSubCategories(response.data);
                 } catch (error) {
                     toast.error("Erreur lors de la récupération des sous-catégories");

@@ -1,4 +1,4 @@
-// admin page (admin dashboard)
+// admin page (admin dashboard) src/app/admin/page.tsx component
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import {verifyTokenForPage} from "@/utils/verifyToken";

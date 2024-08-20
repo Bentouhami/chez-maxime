@@ -1,4 +1,4 @@
-// AdminDashboardLayout.tsx : Layout pour les pages d'administration
+// AdminDashboardLayout.tsx: src/app/admin/layout.tsx component for the admin dashboard layout
 
 import React from "react";
 import AdminSidebar from "./AdminSidebar";

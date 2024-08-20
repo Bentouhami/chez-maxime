@@ -1,4 +1,4 @@
-// AdminSidebar.tsx : Composant React pour le sidebar de l'administration (tableaux de bord)
+// AdminSidebar.tsx : src/app/admin/AdminSidebar.tsx component for the admin sidebar
 import React from "react";
 import Link from "next/link";
 import { CgMenuGridR } from 'react-icons/cg';

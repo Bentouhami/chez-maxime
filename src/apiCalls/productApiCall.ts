@@ -60,3 +60,20 @@ export async function getSingleProduct(productId: string): Promise<SingleProduct
 
   return response.json();
 }
+
+// get catégories of products
+interface ProductCategory {
+  id: string;
+  name: string;
+}
+export async function getProductCategories(): Promise<ProductCategory[]> {
+  const response = await fetch(`${DOMAIN}/api/products/categories`, {
+    cache: 'no-store'
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch product categories");
+  }
+
+  return response.json();
+}

@@ -1,4 +1,4 @@
-// ProductItem.tsx component  /components/ui/products/ProductItem.tsx
+// src/ui/products/ProductItem.tsx (Client Component) pour l'affichage d'un produit sur la page des produits (products/[id]/page.tsx)
 
 import Link from "next/link";
 import Image from "next/image";

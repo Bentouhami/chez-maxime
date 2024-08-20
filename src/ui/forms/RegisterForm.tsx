@@ -77,12 +77,12 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className="container vh-100 d-flex flex-column justify-content-center align-items-center col-12 mt-5 mb-5 text-center">
+        <div className="w-100 container d-flex col-md-2 flex-column justify-content-center align-items-center mt-5 mb-5 text-center 3">
             <h1>S&apos;inscrire</h1><br/>
-            <div className="card bg-light show-form w-100 w-md-75 w-lg-50 shadow-lg">
+            <div className="min-vw-50 w-8/12 p-5 card bg-light show-form shadow-lg">
                 <form className="card-body" onSubmit={handleSubmit}>
 
-                    <div className="mb-3">
+                <div className="mb-3">
                         <label htmlFor="firstName" className="form-label">PRÉNOM</label>
                         <input
                             type="text"

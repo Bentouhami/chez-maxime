@@ -1,3 +1,5 @@
+// verifyToken.ts: src/utils/verifyToken.ts utility function for verifying the token in the application
+
 import jwt from 'jsonwebtoken';
 import { NextRequest } from 'next/server';
 import { JWTPayload } from '@/utils/types';

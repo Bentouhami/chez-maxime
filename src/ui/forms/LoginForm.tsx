@@ -8,9 +8,10 @@ import {Slide, toast, ToastContainer} from "react-toastify";
 import {LoginUserDto} from "@/utils/dtos";
 import axios from "axios"; // Import correct pour Next.js 13+
 import {DOMAIN} from '@/utils/constants';
-
+import { useFormStatus } from 'react-dom'
 const LoginForm = () => {
     const router = useRouter();
+    const {  pending } = useFormStatus();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -74,9 +75,9 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="  container vh-100 d-flex flex-column justify-content-center align-items-center col-12 mt-5 mb-5 text-center 3">
+        <div className=" w-100 container d-flex col-md-2 flex-column justify-content-center align-items-center mt-5 mb-5 text-center 3">
             <h1>Se connecter</h1><br/>
-            <div className=" card bg-light show-form w-100 shadow-lg">
+            <div className="min-vw-50 w-8/12 p-5 card bg-light show-form shadow-lg">
                 <form className="card-body" onSubmit={handelSubmit}>
                     <div className="mb-3">
                         <label htmlFor="username" className="form-label">EMAIL</label>
@@ -101,10 +102,10 @@ const LoginForm = () => {
                         />
                     </div>
                     <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mt-3">
-                        <Button type="submit" className="btn btn-primary w-100 w-md-auto me-0 me-md-2 text-sm-start">
+                        <Button disabled={pending} type="submit" className="btn btn-primary w-100 w-md-auto me-0 me-md-2 text-sm-start">
                             SE CONNECTER
                         </Button>
-                        <Button type="button" onClick={handelRegister}
+                        <Button disabled={pending} type="button" onClick={handelRegister}
                                 className="btn btn-secondary w-100 w-md-auto mt-2 mt-md-0">
                             S&apos;INSCRIRE
                         </Button>

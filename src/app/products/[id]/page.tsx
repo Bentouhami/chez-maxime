@@ -1,4 +1,5 @@
-//import { getSingleArticle } from "@/apiCalls/articleApiCall";
+// src/app/products/[id]/page.tsx (Client Component) pour la page d'un produit donné
+
 import AddCommentForm from "@/ui/comments/AddCommentForm";
 import CommentItem from "@/ui/comments/CommentItem";
 import {cookies} from "next/headers";
