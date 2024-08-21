@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
+// src/ui/navigations/ClientSidebar.tsx (Client Component) sidebar for the client side
+
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {DOMAIN} from '@/utils/constants';
-import {toast} from 'react-toastify';
+import { DOMAIN } from '@/utils/constants';
+import { toast } from 'react-toastify';
 import Accordion from 'react-bootstrap/Accordion';
 import Link from 'next/link';
 import styles from '../navigations/header/Header.module.css';
-
 
 interface Category {
     id: number;
@@ -13,11 +14,16 @@ interface Category {
     subCategories?: Category[];
 }
 
-const ClientSidebar = () => {
+interface ClientSidebarProps {
+    onSelect?: () => void;
+}
+
+const ClientSidebar = ({ onSelect }: ClientSidebarProps) => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // Fetch categories only once
         const fetchCategories = async () => {
             try {
                 const response = await axios.get(`${DOMAIN}/api/products/categories`);
@@ -63,10 +69,11 @@ const ClientSidebar = () => {
                                     {category.subCategories.map((subCategory) => (
                                         <li key={subCategory.id}>
                                             <Link className={styles.navLink}
-                                                href={{
-                                                    pathname: '/products/subcategories',
-                                                    query: {subcategoryId: subCategory.id},
-                                                }}
+                                                  href={{
+                                                      pathname: '/products/subcategories',
+                                                      query: { subcategoryId: subCategory.id },
+                                                  }}
+                                                  onClick={onSelect}
                                             >
                                                 {subCategory.name}
                                             </Link>

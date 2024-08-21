@@ -24,7 +24,8 @@ const ProductItem = ({ product }: ProductItemProps) => {
                         width={300}
                         height={300}
                         className="rounded-lg"
-                        style={{ objectFit: 'cover' }} // Use style prop instead of objectFit
+                        style={{ objectFit: 'cover' }}
+                        priority={true}// Use style prop instead of objectFit
                     />
                 </div>
             </Link>

@@ -1,4 +1,4 @@
-// src/app/layout.tsx (Server Component)
+// src/app/layout.tsx (Server Component) global layout
 
 import type {Metadata} from "next";
 import React from "react";
